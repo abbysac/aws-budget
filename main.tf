@@ -113,3 +113,17 @@ resource "aws_budgets_budget" "link" {
 #   records = ["10 feedback-smtp.us-east-1.amazonses.com"]
 # }
 
+output "csvdata" {
+  value = local.csvfld
+}
+
+
+locals {
+  csvfld = csvdecode(file("./csvdata.csv"))
+}
+#1. OIDC provider for GitHub
+resource "aws_iam_openid_connect_provider" "github" {
+  url             = "https://token.actions.githubusercontent.com"
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = ["74f3a68f16524f15424927704c9506f55a9316bd"] # GitHub's current thumbprint
+}
