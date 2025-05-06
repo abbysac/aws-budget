@@ -126,4 +126,12 @@ resource "aws_iam_openid_connect_provider" "github" {
   url             = "https://token.actions.githubusercontent.com"
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = ["74f3a68f16524f15424927704c9506f55a9316bd"] # GitHub's current thumbprint
+  # id              = "arn:aws:iam::224761220970:role/GitHubActionsOIDCRole"
 }
+
+data "aws_caller_identity" "current" {}
+
+# import {
+#   to = aws_iam_openid_connect_provider.default
+#   id = "arn:aws:iam::224761220970:role/GitHubActionsOIDCRole"
+# }
